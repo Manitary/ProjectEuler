@@ -1,0 +1,4 @@
+n:=100;
+sumsquare:=Integers()!(n*(n+1)*(2*n+1)/6);
+squaresum:=(Integers()!(n*(n+1)/2))^2;
+squaresum-sumsquare;

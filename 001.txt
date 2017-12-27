@@ -1,0 +1,7 @@
+sum:=0;
+for i in [1..999] do
+	if i mod 3 eq 0 or i mod 5 eq 0 then
+		sum+:=i;
+	end if;
+end for;
+sum;

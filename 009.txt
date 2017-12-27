@@ -1,0 +1,7 @@
+for a in [1..Floor(Sqrt(5*10^5))] do
+	b:=(5*10^5-10^3*a)/(10^3-a);
+	if IsCoercible(Integers(),b) then
+		a*b*(1000-a-b);
+		break;
+	end if;
+end for;

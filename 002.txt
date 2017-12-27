@@ -1,0 +1,10 @@
+sum:=0;
+n1:=0;
+n2:=2;
+repeat
+	sum+:=n2;
+	temp:=n2;
+	n2:=4*n2+n1;
+	n1:=temp;
+until n2 gt 4000000;
+sum;

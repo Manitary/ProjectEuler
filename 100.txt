@@ -1,0 +1,6 @@
+r:=0;
+repeat
+	r+:=1;
+	z:=((Sqrt(2)+1)^(2*r+1)-(Sqrt(2)-1)^(2*r+1))/(2*Sqrt(2));
+until z gt 10^12;
+Round((1+z)/2);

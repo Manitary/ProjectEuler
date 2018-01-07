@@ -1,0 +1,16 @@
+F<x>:=PolynomialRing(RealField());
+f:=1-x+x^2-x^3+x^4-x^5+x^6-x^7+x^8-x^9+x^10;
+seq:=[Evaluate(f,n):n in [1..Degree(f)+1]];
+
+sum:=0;
+for n in [1..Degree(f)+1] do
+	p:=Round(Interpolation([RealField()!i:i in [1..n]],[Evaluate(f,k):k in [1..n]]));
+	check:=[Evaluate(p,n):n in [1..Degree(f)+1]];
+	for r in [1..#check] do
+		if seq[r] ne check[r] then
+			sum+:=check[r];
+			break;
+		end if;
+	end for;
+end for;
+sum;

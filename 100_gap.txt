@@ -1,0 +1,7 @@
+n:=10^12;
+repeat
+	n:=n+1;
+	Print(n,"\n");
+	k:=2*n^2-2*n+1;
+until (RootInt(k))^2=k;
+Print("B: ",(1+RootInt(k))/2,"\n");

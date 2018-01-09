@@ -1,0 +1,6 @@
+n:=0;
+repeat
+	n+:=1;
+	m:=Integers()!(n*(n+1)/2);
+until #Divisors(m) gt 500;
+m;

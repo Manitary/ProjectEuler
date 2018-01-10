@@ -1,0 +1,7 @@
+sum:=0;
+n:=Factorial(100);
+while n gt 0 do
+	sum+:=n mod 10;
+	n div:=10;
+end while;
+sum;

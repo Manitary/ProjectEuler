@@ -1,0 +1,19 @@
+list:={2..10000-1};
+amicable:={};
+
+while #list ne 0 do
+	n:=Random(list);
+	Exclude(~list,n);
+	d:=SumOfDivisors(n)-n;
+	if d ne n and SumOfDivisors(d)-d eq n then
+		Include(~amicable,d);
+		Include(~amicable,n);
+		Exclude(~list,d);
+	end if;
+end while;
+
+sum:=0;
+for n in amicable do
+	sum+:=n;
+end for;
+sum;

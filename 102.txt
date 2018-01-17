@@ -3,7 +3,7 @@ input:=[[-340,495,-153,-910,835,-947],[-175,41,-421,-714,574,-645],[-547,712,-35
 n:=0;
 for points in input do
 	T:=Polytope([[points[i],points[i+1]] : i in [1..#points by 2]]);
-	Z:=ConeToPolyhedron(ZeroCone(2));
+	Z:=Polytope([[0,0]]);
 	if Z subset T then
 		n+:=1;
 	end if;

@@ -1,2 +1,2 @@
 n:=600851475143;
-Maximum(Factorization(n))[1];
+Factorization(n)[#Factorization(n)][1];

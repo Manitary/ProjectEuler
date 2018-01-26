@@ -1,0 +1,46 @@
+a1:=20;
+a2:=45;
+numbers:={a1+1..a2-1};
+min_sum:=0;
+for stuff in Subsets(numbers,5) do
+    set:=stuff join {a1,a2};        
+	special:=true;
+	test:=Sort(SetToSequence(set));
+	if (test[1]+test[2] le test[7]) or (test[1]+test[2]+test[3] le test[6]+test[7]) or (test[1]+test[2]+test[3]+test[4]) le (test[5]+test[6]+test[7]) then
+		special:=false;
+	end if;
+	for i in [2..3] do
+		for sub1 in Subsets(set,i) do
+			for sub2 in Subsets(set diff sub1,i) do
+				sum1:=0;
+				sum2:=0;
+				for n1 in sub1 do
+					sum1+:=n1;
+				end for;
+				for n2 in sub2 do
+					sum2+:=n2;
+				end for;
+				if sum1 eq sum2 then
+					special:=false;
+					break i;
+				end if;
+			end for;
+		end for;
+	end for;	
+	if special then
+		sum:=0;
+		for i in [1..7] do
+			sum+:=test[i];
+		end for;
+		if sum lt min_sum or min_sum eq 0 then
+			min_sum:=sum;
+			win_set:=set;
+		end if;
+	end if;
+end for;
+
+s:="";
+for n in Sort(SetToSequence(win_set)) do
+  s*:=IntegerToString(n);
+end for;
+s;

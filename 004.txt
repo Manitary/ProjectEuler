@@ -1,13 +1,13 @@
 candidate:=0;
 for a in [1..9] do
     for b in [a..9] do
-        if b ge a and a*b mod 10 eq 9 then
+        if a*b mod 10 eq 9 then
             for i in [1..9] do
                 for j in [1..9] do
                     n:=900+10*i+a;
                     m:=900+10*j+b;
                     if Reverse(IntegerToString(n*m)) eq IntegerToString(n*m) then
-                        if n*m gt candidate then
+						if n*m gt candidate then
 							candidate:=n*m;
 						end if;
                     end if;
@@ -16,3 +16,4 @@ for a in [1..9] do
         end if;
     end for;
 end for;
+candidate;

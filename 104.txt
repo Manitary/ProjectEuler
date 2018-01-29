@@ -1,0 +1,20 @@
+a:=0;b:=1;n:=1;
+repeat
+	found:=false;
+	n+:=1;
+	if n mod 2 eq 0 then
+		a+:=b;
+		a mod:=10^9;
+		tocheck:=a;
+	else
+		b+:=a;
+		b mod:=10^9;
+		tocheck:=b;
+	end if;
+	if SequenceToSet(IntegerToSequence(tocheck,10)) eq {1..9} then
+		if {1..9} eq {StringToInteger(i): i in SequenceToSet(Eltseq(Substring(IntegerToString(Fibonacci(n)),1,9)))} then
+			found:=true;
+			n;
+		end if;
+	end if;
+until found;

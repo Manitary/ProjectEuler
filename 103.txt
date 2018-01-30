@@ -12,15 +12,7 @@ for stuff in Subsets(numbers,5) do
 	for i in [2..3] do
 		for sub1 in Subsets(set,i) do
 			for sub2 in Subsets(set diff sub1,i) do
-				sum1:=0;
-				sum2:=0;
-				for n1 in sub1 do
-					sum1+:=n1;
-				end for;
-				for n2 in sub2 do
-					sum2+:=n2;
-				end for;
-				if sum1 eq sum2 then
+				if &+SetToSequence(sub1) eq &+SetToSequence(sub2) then
 					special:=false;
 					break i;
 				end if;

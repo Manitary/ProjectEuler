@@ -1,0 +1,52 @@
+setsize:=12;
+
+function permutations (seq)
+	perms:={};
+	orbit:=[1..#seq];
+	for g in SymmetricGroup(#seq) do
+		Include(~perms,[seq[i]:i in orbit^g]);
+	end for;
+	return SetToSequence(perms);
+end function;
+
+function count (size)
+	tot:=0;
+	p:=Partitions(size);
+	for i in [1..#p] do
+		for j in [i..#p] do
+			d:=Abs(#p[i]-#p[j]);
+			if d gt 1 then
+				break;
+			end if;
+			a:=permutations(p[i]);
+			b:=permutations(p[j]);
+			if d eq 1 then
+				if #p[i] gt #p[j] then
+					b:=[Append(x,0):x in b];
+				else
+					a:=[Append(x,0):x in a];
+				end if;
+			end if;
+			for s in a do
+				for t in b do
+					ord:=[s[i] ge t[i]:i in [1..#s]];
+					if #SequenceToSet(ord) eq 2 then
+						if p[i] eq p[j] then
+							tot+:=0.5;
+						else
+							tot+:=1;
+						end if;						
+					end if;
+				end for;
+			end for;
+		end for;
+	end for;
+	return Integers()!tot;
+end function;
+
+total:=0;
+for n in [2..Floor(setsize/2)] do
+	count(n);
+	total+:=count(n)*Binomial(setsize,2*n);
+end for;
+total;

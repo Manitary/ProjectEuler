@@ -1,5 +1,3 @@
-
-
 function count(size)
 	tot:=0;
 	for choice in Subsets({2..2*size},size-1) do

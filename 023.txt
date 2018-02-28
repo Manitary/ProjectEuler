@@ -1,0 +1,15 @@
+max:=28123;
+abundant:={};
+for i in [1..max-1] do
+	if SumOfDivisors(i) gt i then
+		Include(~abundant,i);
+	end if;
+end for;
+
+sum:=0;
+for i in [1..max] do
+	if #RestrictedPartitions(i,2,abundant) eq 0 then
+		sum+:=i;
+	end if;
+end for;
+sum;

@@ -1,0 +1,6 @@
+diffsol:=1000;
+n:=1;
+repeat
+	n+:=1;
+until (NumberOfDivisors(n^2)+1)/2 gt diffsol;
+n;

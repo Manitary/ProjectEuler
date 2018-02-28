@@ -1,0 +1,24 @@
+max:=20;
+bull:=25;
+S:=[<i,1>:i in [1..max] cat [bull]];
+D:=[<i,2>:i in [1..max] cat [bull]];
+T:=[<i,3>:i in [1..max]];
+points:=S cat D cat T cat [<0,0>];
+
+
+target_score:=100;
+tot:=0;
+
+for i in [1..#points] do
+	for j in [i..#points] do
+		score:=points[i][1]*points[i][2] + points[j][1]*points[j][2];
+		if score le target_score-2 then 
+			for shot3 in D do
+				if score+shot3[1]*shot3[2] lt target_score then
+					tot+:=1;
+				end if;
+			end for;
+		end if;
+	end for;
+end for;
+tot;

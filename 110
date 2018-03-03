@@ -1,0 +1,36 @@
+c:=4*10^6;
+d:=2*c-1;
+
+i:=0;
+repeat 
+    i+:=1;
+until 3^i gt d;
+exp:=[1:j in [1..i]];
+
+repeat
+	best:=true;
+	p:=NthPrime(#exp);
+	for m in [1..p-1] do
+		test:=exp;
+		test[#test]-:=1;
+		if test[#test] eq 0 then
+			Prune(~test);
+		end if;
+		if m gt 1 then
+			for f in Factorization(m) do
+				for j in [1..#exp-1] do
+					if f[1] eq NthPrime(j) then
+						test[j]+:=f[2];
+					end if;
+				end for;
+			end for;
+		end if;
+		if &*[2*e+1:e in test] gt d then
+			exp:=Reverse(Sort(test));
+			best:=false;
+			break;
+		end if;
+	end for;
+until best;
+		
+&*[NthPrime(j)^exp[j]: j in [1..#exp]];

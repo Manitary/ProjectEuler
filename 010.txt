@@ -1,4 +1,1 @@
-sum:=0;
-for p in PrimesUpTo(2000000) do
-	sum+:=p;
-end for;
+&+PrimesUpTo(2000000);

@@ -2,16 +2,10 @@ list:=[[08,02,22,97,38,15,00,40,00,75,04,05,07,78,52,12,50,77,91,08],[49,49,99,4
 max:=0;
 for i in [1..#list-3] do
 	for j in [1..#list[i]-3] do
-		h:=1;
-		d:=1;
-		v:=1;
-		rd:=1;
-		for c in [0..3] do
-			h*:=list[i][j+c];
-			d*:=list[i+c][j+c];
-			v*:=list[i+c][j];
-			rd*:=list[i+c][j+3-c];
-		end for;
+		h:=&*[list[i][j+c]:c in [0..3]];
+		d:=&*[list[i+c][j+c]:c in [0..3]];
+		v:=&*[list[i+c][j]:c in [0..3]];
+		rd:=&*[list[i+c][j+3-c]:c in [0..3]];
 		max:=Maximum([max,h,d,v,rd]);
 	end for;
 end for;

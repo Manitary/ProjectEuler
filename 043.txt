@@ -1,0 +1,34 @@
+sum:=0;
+for d6 in {0,5} do
+	for d4 in {0,2,4,6,8} diff {d6} do
+		digits:={0..9} diff {d4,d6};
+		for d3 in digits do
+			for d5 in digits diff {d3} do
+				if (d3+d4+d5) mod 3 eq 0 then
+					for d7 in digits diff {d3,d5} do
+						for d8 in digits diff {d3,d5,d7} do
+							if (d6-d7+d8) mod 11 eq 0 then
+								if (100*d5+10*d6+d7) mod 7 eq 0 then
+									for d9 in digits diff {d3,d5,d7,d8} do
+										if (100*d7+10*d8+d9) mod 13 eq 0 then
+											for d10 in digits diff {d3,d5,d7,d8,d9} do
+												if (100*d8+10*d9+d10) mod 17 eq 0 then
+													for d1 in digits diff {0,d3,d5,d7,d8,d9,d10} do
+														d2:=Random(digits diff {d1,d3,d5,d7,d8,d9,d10});
+														sum+:=SequenceToInteger([d10,d9,d8,d7,d6,d5,d4,d3,d2,d1],10);
+													end for;
+												end if;
+											end for;
+										end if;
+									end for;
+								end if;
+							end if;
+						end for;
+					end for;
+				end if;
+			end for;
+		end for;
+	end for;
+end for;
+sum;
+				

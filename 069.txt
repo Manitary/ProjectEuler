@@ -1,0 +1,11 @@
+max:=10^6;
+maxrate:=0;
+best:=0;
+for n in [1..max] do
+	rate:=n/EulerPhi(n);
+	if rate gt maxrate then
+		best:=n;
+		maxrate:=rate;
+	end if;
+end for;
+best;

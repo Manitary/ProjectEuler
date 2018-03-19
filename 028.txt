@@ -1,0 +1,7 @@
+n:=1001;
+k:=(n-1)/2;
+sum:=4*k+1;
+for i in [1..k] do
+	sum+:=2*i*10+2*i*16*(k-i);
+end for;
+sum;

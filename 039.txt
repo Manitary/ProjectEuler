@@ -1,0 +1,15 @@
+maxsol:=0;
+best:=0;
+for p in [2..1000 by 2] do
+    sol:=0;
+    for b in [1..p-1] do
+        if IsDivisibleBy(p*(p-2*b),2*(p-b)) then
+            sol+:=1;
+        end if;
+    end for;
+    if sol gt maxsol then
+        best:=p;
+        maxsol:=sol;
+    end if;
+end for;
+best;

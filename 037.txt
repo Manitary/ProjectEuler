@@ -1,0 +1,31 @@
+function truncate(plist,dir)
+    if dir then
+        Prune(~plist);
+    else
+        Remove(~plist,1);
+    end if;
+    if #plist eq 0 then
+        return true;
+    else
+        p:=SequenceToInteger(plist,10);
+        if IsPrime(p) then
+            return truncate(plist,dir);
+        else
+            return false;
+        end if;
+    end if;
+end function;
+
+n:=7;
+truncable:={};
+while #truncable lt 11 do
+    n:=NextPrime(n);
+    digits:=IntegerToSequence(n,10);
+    if not(0 in digits) then
+        if truncate(digits,true) and truncate(digits,false) then
+            Include(~truncable,n);
+        end if;
+    end if;
+end while;
+truncable;
+&+truncable;

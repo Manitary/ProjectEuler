@@ -1,0 +1,14 @@
+n:=0;
+
+repeat
+	n+:=1;
+	d:=Sort(IntegerToSequence(n));
+	for i in [2..6] do
+		check:=false;
+		if Sort(IntegerToSequence(i*n)) ne d then
+			break;
+		end if;
+		check:=true;
+	end for;
+until check;
+n;

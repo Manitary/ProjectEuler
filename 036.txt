@@ -1,0 +1,12 @@
+max:=10^6;
+sum:=0;
+for n in [1..max by 2] do
+    digits:=IntegerToSequence(n,10);
+    if digits eq Reverse(digits) then
+        digits2:=IntegerToSequence(n,2);
+        if digits2 eq Reverse(digits2) then
+            sum+:=n;
+        end if;
+    end if;
+end for;
+sum;

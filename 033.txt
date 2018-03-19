@@ -1,0 +1,13 @@
+prod:=1;
+for a in [1..9] do
+    for b in [1..9] do
+        for c in [1..9] do
+            if (10*a+b)/(10*b+c) eq a/c then
+                if not(a eq b and b eq c) then
+                    prod*:=a/c;
+                end if;
+            end if;
+        end for;
+    end for;
+end for;
+Denominator(prod);

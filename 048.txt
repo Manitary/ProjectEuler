@@ -1,0 +1,6 @@
+sum:=0;
+for i in [1..1000] do
+	k:=(i^i) mod 10^10;
+	sum:=(sum+k) mod 10^10;
+end for;
+sum;

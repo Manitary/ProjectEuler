@@ -1,0 +1,31 @@
+procedure find_rotations(p,~list,~count)
+    digits:=IntegerToSequence(p,10);
+    rotations:={SequenceToInteger(Rotate(digits,i)):i in [1..#digits]};
+    if rotations subset list then
+        count+:=#rotations;
+    end if;
+    list diff:=rotations;
+end procedure;
+
+max:=10^6;
+primes:=SequenceToSet(PrimesUpTo(max));
+
+for p in primes do
+    digits:=IntegerToSequence(p,10);
+    for d in {0,2,4,5,6,8} do
+        if d in digits then
+            Exclude(~primes,p);
+            break;
+        end if;
+    end for;
+    if &+digits mod 3 eq 0 then
+        Exclude(~primes,p);
+    end if;
+end for;
+
+count:=3;
+while #primes gt 0 do
+    p:=Random(primes);
+    find_rotations(p,~primes,~count);
+end while;
+count;

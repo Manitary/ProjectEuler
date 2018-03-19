@@ -1,0 +1,19 @@
+primes:=SequenceToSet(PrimesUpTo(10^4)) diff SequenceToSet(PrimesUpTo(10^3));
+
+for p in primes do
+	digits:=IntegerToSequence(p,10);
+	candidates:=Sort(SetToSequence(SequenceToSet([SequenceToInteger([digits[Image(g,i)]:i in [1..4]],10): g in SymmetricGroup(4)]) meet primes));
+	primes diff:=SequenceToSet(candidates);
+	if #candidates gt 3 then
+		for i in [1..#candidates-2] do
+			for j in [i+1..#candidates-1] do
+				k:=2*candidates[j]-candidates[i];
+				if k in candidates then
+					if candidates[i] ne 1487 then
+						IntegerToString(candidates[i]) cat IntegerToString(candidates[j]) cat IntegerToString(k);
+					end if;
+				end if;
+			end for;
+		end for;
+	end if;
+end for;

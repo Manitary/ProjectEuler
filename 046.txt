@@ -1,0 +1,18 @@
+solved:=false;
+n:=3;
+while not(solved) do
+	n+:=2;
+	if not(IsPrime(n)) then
+		for p in PrimesUpTo(n) do
+			decomposed:=false;
+			if IsSquare((n-p)/2) then
+				decomposed:=true;
+				break;
+			end if;
+		end for;
+		if not(decomposed) then
+			solved:=true;
+		end if;
+	end if;
+end while;
+n;

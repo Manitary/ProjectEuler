@@ -1,0 +1,13 @@
+F<x>:=PolynomialRing(Integers());
+
+h:=143;
+solved:=false;
+while not(solved) do
+	h+:=1;
+	T:=x^2+x-2*h*(2*h-1);
+	P:=3*x^2-x-2*h*(2*h-1);
+	if 1 in [Sign(r[1]):r in Roots(T)] and 1 in [Sign(r[1]):r in Roots(P)] then
+		h*(2*h-1);
+		solved:=true;
+	end if;
+end while;

@@ -1,7 +1,7 @@
 max:=28123;
 abundant:={};
 for i in [1..max-1] do
-	if SumOfDivisors(i) gt i then
+	if SumOfDivisors(i)-1-i gt i then
 		Include(~abundant,i);
 	end if;
 end for;

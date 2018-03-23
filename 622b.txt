@@ -1,0 +1,33 @@
+function r(d,k,n)
+	if k eq 0 then
+		return n;
+	else
+		if n le d then
+			return r(d,k-1,2*(n-1)+1);
+		else
+			return r(d,k-1,2*(n-d));
+		end if;
+	end if;
+end function;
+
+s:=60;
+tot:=0;
+for d in [2..2^(s-1)+1] do
+	restoring:={1..s};
+	for c in [2..2*d-1] do
+		for k in restoring do
+			n:=r(d,k,c);
+			if k in restoring and n ne c then
+				Exclude(~restoring,k);
+				if not(s in restoring) then
+					break c;
+				end if;
+			end if;
+		end for;
+	end for;
+	if restoring eq {s} then
+		tot+:=2*d;
+		d,tot;
+	end if;
+end for;
+s,tot;

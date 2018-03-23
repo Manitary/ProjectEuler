@@ -1,0 +1,21 @@
+s:=60;
+tot:=0;
+for d in [2..2^(s-1)+1] do
+	r:=map<{2..2*d-1}->{2..2*d-1}|x:->x le d select 2*(x-1)+1 else 2*(x-d)>;
+	restoring:={1..s};
+	for c in [2..2*d-1] do
+		for k in restoring do
+			if c@(r^k) ne c then
+				Exclude(~restoring,k);
+				if not(s in restoring) then
+					break c;
+				end if;
+			end if;
+		end for;
+	end for;
+	if restoring eq {s} then
+		tot+:=2*d;
+		d,tot;
+	end if;
+end for;
+s,tot;

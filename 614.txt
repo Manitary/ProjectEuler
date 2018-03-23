@@ -1,0 +1,23 @@
+max:=100;
+
+
+list:=[{[1]}];
+tot:=1;
+
+for n in [2..max] do
+	list[n]:={};
+	if n mod 4 ne 2 then
+		Include(~list[n],[n]);
+	end if;
+	for m in [1..n-1] do
+		if (n-m) mod 4 ne 2 then
+			for part in list[m] do
+				if not(n-m in part) then
+					Include(~list[n],Reverse(Sort(Append(part,n-m))));
+				end if;
+			end for;
+		end if;
+	end for;
+	tot+:=#list[n];
+end for;
+max,tot;

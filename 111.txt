@@ -1,0 +1,41 @@
+f:=func<d|d eq 0 select 10 else d>;
+l:=10;
+
+procedure findprimes(d,~m,~s)
+    found:=false;
+    for perm in Subsets({1..l},m) do
+        C:=CartesianPower({0..9} diff {d},l-m);
+        for c in C do
+            i:=1;
+            n:=[];
+            for k in [1..l] do
+                if k in perm then
+                    Append(~n,d);
+                else
+                    Append(~n,c[i]);
+                    i+:=1;
+                end if;
+            end for;
+            if n[#n] gt 0 then
+                N:=SequenceToInteger(n,10);
+                if IsPrime(N) then
+                    found:=true;
+                    s+:=N;
+                end if;
+            end if;
+        end for;
+    end for;
+    if not(found) then
+        m-:=1;
+        findprimes(d,~m,~s);
+    end if;       
+end procedure;
+
+m:=[10:i in [1..10]];
+s:=[0:i in [1..10]];
+
+for d in [0..9] do
+    findprimes(d,~m[f(d)],~s[f(d)]);
+end for;
+
+&+s;

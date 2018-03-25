@@ -1,0 +1,2 @@
+n:=100;
+&+[Binomial(k+8,8)+Binomial(k+9,9)-10:k in [1..n]];

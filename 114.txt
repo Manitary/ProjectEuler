@@ -1,0 +1,10 @@
+l:=7
+s:={3..l};
+t:=2;
+for n in [1..l-1] do
+    for m in [1..n+1] do
+        p:=RestrictedPartitions(l-n,m,s);
+		resta da contare le permutazioni di ogni partizione
+		e contare come per ogni permutazione posso infilare i blocchi da 1
+	end for;
+end for;

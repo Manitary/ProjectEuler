@@ -1,0 +1,32 @@
+r:=0.99;
+
+b:=0;
+nb:=0;
+n:=0;
+repeat
+    n+:=1;
+    bouncy:=false;
+    N:=IntegerToSequence(n);
+    if #SequenceToSet(N) gt 1 then
+		i:=0;
+		repeat
+			i+:=1;
+		until N[i+1] ne N[i];
+		s:=N[i+1] gt N[i];
+		for k in [i+1..#N-1] do
+			if N[k+1] ne N[k] then
+				if (N[k+1] gt N[k]) ne s then
+					bouncy:=true;
+					break;
+				end if;
+			end if;
+		end for;
+    end if;
+    if bouncy then
+        b+:=1;
+    else
+        nb+:=1;
+    end if;
+until b/(b+nb) eq r;
+
+n;

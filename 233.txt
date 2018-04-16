@@ -1,4 +1,4 @@
-N:=10^11;
+N:=17*169*125*2;
 
 procedure count(N,M,prime_list,~tot)
 	to_check:=Sort(SetToSequence(SequenceToSet(PrimesUpTo(Floor(N/M))) meet SequenceToSet(prime_list)));

@@ -1,0 +1,11 @@
+/*
+8- 9-pandigital sono divisibili per 3 -> non primi
+partendo da 7654321 basta provarne un po'
+7654321
+7654231
+7654213
+7653421
+7653241
+7652431
+7652413 <- primo!
+*/

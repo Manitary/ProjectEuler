@@ -1,0 +1,10 @@
+tot:=0;
+for n in [23..100] do
+	for r in [2..Floor(n/2)] do
+		if Binomial(n,r) gt 10^6 then
+			tot+:=n-2*r+1;
+			break;
+		end if;
+	end for;
+end for;
+tot;

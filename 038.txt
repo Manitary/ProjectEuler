@@ -1,0 +1,12 @@
+/*
+9 | (1,2,3,4,5) -> 918273645
+Se 9x -> 9x18(2x)27(3x) -- 8 cifre
+Se 9xy -> 9xy18(2x)(2y) -- 7 cifre
+Se 9xyz -> 9xyz18(2x)(2y)(2z) -- 9 cifre:
+	2x non puo' dare resto o si ha un doppio 9
+	e non puo' essere 4 o si ha un doppio 8
+	dunque x = 3 -> 93yz186(2y)(2z)
+	restano 2,4,5,7 e 5*2 -> 0 o 1, dunque 5 deve essere (2y) ovvero 2*2 + 1 di resto da (2z)
+Ergo la soluzione e':
+9327 | (1,2) -> 932718654
+*/

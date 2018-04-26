@@ -1,0 +1,28 @@
+N:=10^7;
+seq:={89};
+
+procedure checksum(n,m,~seq,prev)
+	s:=&+[d^2:d in Intseq(n,10)];
+	if s gt m then
+		if s in seq then
+			for k in prev do
+				Include(~seq,k);
+			end for;
+		else
+			checksum(s,m,~seq,prev join {s});
+		end if;
+	else
+		if s in seq then
+			for k in prev do
+				Include(~seq,k);
+			end for;
+		end if;
+	end if;
+end procedure;
+
+for i in [1..N] do
+	if not(i in seq) then
+		checksum(i,i,~seq,{i});
+	end if;
+end for;
+#seq;

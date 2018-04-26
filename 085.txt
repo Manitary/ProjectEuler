@@ -1,0 +1,14 @@
+N:=2*10^6;
+l:=Floor(SquareRoot(2*N));
+dist:=N;
+
+for n in [1..l] do
+    for m in [1..l] do
+        tot:=Integers()!(n*m*(n+1)*(m+1)/4);
+        if Abs(N-tot) lt dist then
+            dist:=Abs(N-tot);
+			best:=n*m;
+        end if;
+    end for;
+end for;
+best;

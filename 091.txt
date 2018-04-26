@@ -1,0 +1,22 @@
+L:=StandardLattice(2);
+d:=50;
+rect:={};
+
+for x1 in [1..d] do
+	for y1 in [0..d] do
+		for x2 in [0..x1] do
+			for y2 in [y1..d] do
+				if not([x2,y2] in {[0,0],[x1,y1]}) then
+					o:=L!0;
+					a:=L![x1,y1];
+					b:=L![x2,y2];
+					if InnerProduct(a,b) eq 0 or InnerProduct(a-b,b) eq 0 or InnerProduct(a-b,a) eq 0 then
+						Include(~rect,{o,a,b});
+					end if;
+				end if;
+			end for;
+		end for;
+	end for;
+end for;
+
+#rect;

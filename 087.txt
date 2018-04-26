@@ -1,0 +1,12 @@
+M:=5*10^7;
+sums:={};
+
+for p in PrimesUpTo(Iroot(M,2)) do
+	for q in PrimesUpTo(Iroot(M-p^2,3)) do
+		for r in PrimesUpTo(Iroot(M-p^2-q^3,4)) do
+            Include(~sums,p^2+q^3+r^4);
+		end for;
+    end for;
+end for;
+
+#sums;

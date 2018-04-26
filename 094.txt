@@ -1,0 +1,22 @@
+L:=10^9;
+
+sum:=0;
+
+for k in [1..L] do
+	m:=4+3*k^2;
+	if IsSquare(m) then
+		sgn:=Integers()!(SquareRoot(m)) mod 3 eq 2 select 1 else -1;
+		a:=Integers()!((SquareRoot(m)+sgn)/3);
+		if a mod 2 eq 1 and a+sgn gt 0 then
+			p:=3*a+sgn;
+			p,"-",a,a,a+sgn;
+			if p lt L then
+				sum+:=p;
+			else
+				break;
+			end if;
+			"partial sum: ",sum;
+		end if;
+	end if;
+end for;
+sum;

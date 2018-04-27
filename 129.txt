@@ -1,0 +1,19 @@
+N:=10^6;
+n:=N mod 2 eq 0 select N+1 else N+2;
+repeat
+    n+:=2;
+    while n mod 5 eq 0 or IsPrime(n) do
+        n+:=2;
+    end while;
+    if IsDivisibleBy(n,3) then
+        m:=0;
+        k:=1;
+        repeat
+            m+:=1;
+            k:=(k*10+1) mod n;
+        until k eq 1;
+    else
+        m:=Modorder(10,n);
+    end if;
+until m gt N;
+n;

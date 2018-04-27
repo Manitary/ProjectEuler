@@ -1,0 +1,5 @@
+n:=1;
+repeat
+    n+:=2;
+until (2*n*NthPrime(n)) mod (NthPrime(n)^2) gt 10^10;
+n;

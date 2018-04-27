@@ -1,0 +1,11 @@
+sum:=0;
+p:=38;
+q:=17;
+D:=5;
+for n in [1..12] do
+    r:=2*n-1;
+    L:=Integers()!(((p+q*SquareRoot(D))^r-(p-q*SquareRoot(D))^r)/(2*SquareRoot(D)));
+    L;
+    sum+:=L;
+end for;
+sum;

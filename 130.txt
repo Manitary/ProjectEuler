@@ -1,0 +1,15 @@
+n:=1;
+count:=0;
+sum:=0;
+repeat
+    n+:=2;
+    while n mod 5 eq 0 or IsPrime(n) or IsDivisibleBy(n,3) do
+        n+:=2;
+    end while;
+	if IsDivisibleBy(n-1,Modorder(10,n)) then
+                n,Modorder(10,n);
+		sum+:=n;
+		count+:=1;
+	end if;
+until count eq 25;
+sum;

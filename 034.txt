@@ -1,0 +1,14 @@
+k:=0;
+repeat
+    k+:=1;
+until k*Factorial(9) lt 10^k-1;
+
+sum:=0;
+for n in [3..10^k] do
+    c:=&+[Factorial(d):d in Intseq(n)];
+    if c eq n then
+        c;
+        sum+:=c;
+    end if;
+end for;
+sum;

@@ -1,0 +1,23 @@
+N:=10^6;
+max_l:=0;
+max_p:=0;
+primes:=PrimesUpTo(N);
+for p in primes do
+    sum:=p;
+    l:=1;
+    for q in PrimesInInterval(p+1,N) do
+        sum+:=q;
+        l+:=1;
+        if sum gt N then
+            break;
+        end if;
+        if IsPrime(sum) then
+            if l gt max_l then
+                max_p:=sum;
+                max_l:=l;
+            end if;
+        end if;
+    end for;
+end for;
+max_p;
+max_l;

@@ -1,0 +1,27 @@
+function IsPalindromic(n)
+	s:=Intseq(n);
+	for i in [1..Floor(#s/2)] do
+		if s[i] ne s[#s-i+1] then
+			return false;
+		end if;
+	end for;
+	return true;
+end function;
+
+N:=10000;
+count:=0;
+for n in [1..N] do
+	m:=n;
+	Lychrel:=true;
+	for i in [1..50] do
+		m+:=Seqint(Reverse(Intseq(m)));
+		if IsPalindromic(m) then
+			Lychrel:=false;
+			break;
+		end if;
+	end for;
+	if Lychrel then
+		count+:=1;
+	end if;
+end for;
+count;

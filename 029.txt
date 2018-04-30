@@ -1,0 +1,7 @@
+list:={};
+for a in [2..100] do
+	for b in [2..100] do
+		Include(~list,a^b);
+	end for;
+end for;
+#list;

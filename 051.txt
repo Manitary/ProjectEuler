@@ -1,0 +1,23 @@
+function testreplace(n,d)
+    t:=0;
+    for c in [0..9] do
+        m:=Seqint([k eq d select c else k:k in Intseq(n)]);
+        if m gt 0 and Ilog(10,m) eq Ilog(10,n) and IsPrime(m) then
+            t+:=1;
+        end if;
+    end for;
+    return t;
+end function;
+
+p:=100;
+b:=false;
+repeat
+    p:=NextPrime(p);
+    for d in SequenceToSet(Intseq(p)) do
+        if testreplace(p,d) eq 8 then
+            p;
+            b:=true;
+            break;
+        end if;
+    end for;
+until b;

@@ -1,0 +1,23 @@
+function cycle_length(n)
+	lpow:=1;
+	while true do
+		for mpow in [lpow-1..0 by -1] do
+			if (10^lpow-10^mpow) mod n eq 0 then
+				return lpow-mpow;
+			end if;
+		end for;
+		lpow+:=1;
+	end while;
+end function;
+
+best:=0;
+max:=0;
+
+for p in PrimesUpTo(1000) do
+	l:=cycle_length(p);
+	if l gt max then
+		max:=l;
+		best:=p;
+	end if;
+end for;
+best;

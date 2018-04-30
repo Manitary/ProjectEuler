@@ -1,0 +1,39 @@
+count:=0;
+
+function digit_length (d)
+	if d in {"1","2","6"} then return 3;
+	elif d in {"4","5","9"} then return 4;
+	elif d in {"3","7","8"} then return 5;
+	elif d eq "0" then return 0;
+	end if;
+end function;
+
+function double_digits (t)
+	if t[1] eq "1" then
+		if t eq "10" then return 3;
+		elif t in {"11","12"} then return 6;
+		elif t in {"15","16"} then return 7;
+		elif t in {"13","14","18","19"} then return 8;
+		elif t eq "17" then return 9;
+		end if;
+	elif t[1] in {"4","5","6"} then return 5+digit_length(t[2]);
+	elif t[1] in {"2","3","8","9"} then return 6+digit_length(t[2]);
+	elif t[1] eq "7" then return 7+digit_length(t[2]);
+	elif t[1] eq "0" then return digit_length(t[2]);
+	end if;
+end function;
+	
+
+for i in [1..1000] do
+	s:=IntegerToString(i);
+	case #s:
+		when 4: l:=11;
+		when 1: l:=digit_length(s);
+		when 2: l:=double_digits(s);
+		when 3: l:=digit_length(s[1])+7+double_digits(s[2] cat s[3])+ ((s[2] eq "0" and s[3] eq "0") select 0 else 3);
+	end case;
+	i,l;
+	count+:=l;
+end for;
+
+count;

@@ -1,0 +1,8 @@
+sum:=0;
+for n in [2..10^6] do
+    c:=&+[k^5:k in Intseq(n)];
+    if c eq n then
+        sum+:=c;
+    end if;
+end for;
+sum;

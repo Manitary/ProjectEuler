@@ -1,0 +1,36 @@
+tot:=0;
+
+function day_of_month (m,y)
+	if m in {9, 4, 6, 11} then return 30;
+	elif m in {1, 3, 5, 7, 8, 10, 0} then return 31;
+	elif m eq 2 then
+		if y mod 4 eq 0 and not(y mod 100 eq 0 and y mod 400 ne 0) then
+			return 29;
+		else
+			return 28;
+		end if;
+	end if;
+end function;
+
+procedure next_month(~d,~m,~y)
+	d:=(d+day_of_month(m,y)) mod 7;
+	m:=(m+1) mod 12;
+	if m eq 1 then y+:=1; end if;
+end procedure;
+
+day:=1;
+year:=1900;
+month:=1;
+
+repeat
+	next_month(~day,~month,~year);
+until year eq 1901;
+
+while year lt 2001 do
+	if day eq 0 then
+		tot+:=1;
+	end if;
+	next_month(~day,~month,~year);
+end while;
+
+tot;

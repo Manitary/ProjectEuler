@@ -1,0 +1,25 @@
+for d9 in [3,7], d8 in [0..9], d7 in [0..9] do
+	if ((Seqint([d9,d8,d7])^2) mod 10^3) div 10^2 eq 8 then
+		for d6 in [0..9], d5 in [0..9] do
+			if ((Seqint([d9,d8,d7,d6,d5])^2) mod 10^5) div 10^4 eq 7 then
+				for d4 in [0..9], d3 in [0..9] do
+					if ((Seqint([d9,d8,d7,d6,d5,d4,d3])^2) mod 10^7) div 10^6 eq 6 then
+						for d2 in [0..9],d1 in [0..9] do
+							n:=Seqint([d9,d8,d7,d6,d5,d4,d3,d2,d1]);
+							if ((n^2) mod 10^9) div 10^8 eq 5
+								and ((n^2) mod 10^11) div 10^10 eq 4
+								and ((n^2) mod 10^13) div 10^12 eq 3
+								and ((n^2) mod 10^15) div 10^14 eq 2
+								and ((n^2) mod 10^17) div 10^16 eq 1
+									then
+										if Ilog(10,n^2)+1 eq 17 then
+											n*10;
+										end if;
+							end if;
+						end for;
+					end if;
+				end for;
+			end if;
+		end for;
+	end if;
+end for;

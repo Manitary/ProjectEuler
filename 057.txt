@@ -1,0 +1,15 @@
+function cf(n)
+	s:=0;
+	for i in [0..n-1] do
+		s:=1/(2+s);
+	end for;
+	return 1+s;
+end function;
+
+tot:=0;
+for i in [1..1000] do
+    if Ilog(10,Numerator(cf(i))) gt Ilog(10,Denominator(cf(i))) then
+        tot+:=1;
+    end if;
+end for;
+tot;

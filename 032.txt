@@ -1,0 +1,15 @@
+products:={};
+for a in [1..98] do
+    for b in [123..9876] do
+        if #(SequenceToSet(Intseq(a)) join SequenceToSet(Intseq(b))) eq #(Intseq(a) cat Intseq(b)) then
+            if #Intseq(a)+#Intseq(b)+#Intseq(a*b) gt 9 then
+                break;
+            else
+                if Sort(Intseq(a) cat Intseq(b) cat Intseq(a*b)) eq [1..9] then
+                    Include(~products,a*b);
+                end if;
+            end if;
+        end if;
+    end for;
+end for;
+&+products;

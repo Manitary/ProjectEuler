@@ -3,7 +3,7 @@ for b in PrimesUpTo(1000) do
     for a in [-999..999 by 2] do
         n:=-1;
         repeat
-            n+:=0;
+            n+:=1;
         until not(IsPrime(n^2+a*n+b));
         if n-1 gt maxprimes then
             maxprimes:=n-1;

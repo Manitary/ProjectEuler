@@ -1,0 +1,14 @@
+bn:=0;
+bd:=1;
+
+for d in [1..10^6] do
+	for n in [Ceiling(d*bn/bd)..Floor(3*d/7)] do
+		if GCD(n,d) eq 1 then
+			if n/d lt 3/7 and n/d gt bn/bd then
+				bn:=n;
+				bd:=d;
+			end if;
+		end if;
+	end for;
+end for;
+bn;

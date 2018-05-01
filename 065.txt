@@ -1,0 +1,9 @@
+function cf(n)
+	s:=0;
+	for i in [n..1 by -1] do
+		s:=1/(s+(i mod 3 eq 2 select 2*(i+1)/3 else 1));
+	end for;
+	return 2+s;
+end function;
+
+&+Intseq(Numerator(cf(99)));

@@ -1,0 +1,23 @@
+r:=15499/94744;
+g:=func<x|EulerPhi(x)/(x-1)>;
+
+procedure testrange(m,n,~list)
+	if g(m) lt r then
+		Include(~list,m);			
+	else
+		for p in PrimesUpTo(Floor(n/m)) do
+			testrange(m*p,n,~list);
+		end for;
+	end if;
+end procedure;
+
+d:=1;
+p:=1;
+repeat
+    p:=NextPrime(p);
+    d*:=p;
+until g(d) lt r;
+
+list:={d};
+testrange(Integers()!(d/p),d,~list);
+Min(list);

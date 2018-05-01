@@ -1,0 +1,20 @@
+N:=10^8;
+P:=PrimesUpTo(N);
+sum:=0;
+
+for p in P do
+	n:=p-1;
+	check:=true;
+	for f in Factorization(n) do
+		if f[2] gt 1 then
+			check:=false;
+			break;
+		end if;
+	end for;
+	if check then
+		n;
+		sum+:=n;
+	end if;
+end for;
+
+sum;

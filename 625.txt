@@ -1,0 +1,34 @@
+N:=10^11;
+M:=998244353;
+s:=GF(M)!0;
+
+t1:=Realtime();
+for j in [1..N] do
+	t2:=Realtime();
+	primes:=PrimeDivisors(j);
+	done:={};
+	for p in primes do
+		n:=0;
+		for i in [1..Integers()!(j/p)] do
+			n+:=p;
+			todo:=true;
+			for q in done do
+				if IsDivisibleBy(n,q) then
+					todo:=false;
+					break;
+				end if;
+			end for;
+			if todo then
+				s+:=GCD(j,n);
+			end if;
+		end for;
+		Include(~done,p);
+	end for;
+	s+:=EulerPhi(j);
+	if j mod 10^9 eq 0 then
+		j,"done, time taken for the batch:",Realtime()-t2;
+	end if;
+end for;
+s;
+"Total Time:",Realtime()-t1;
+

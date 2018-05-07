@@ -1,0 +1,47 @@
+function cf(x)
+	if IsCoercible(Integers(),x) then
+		c:=[x];
+	else
+		c:=[];
+		c[1]:=Floor(x);
+		f:=1/(x-Floor(x));
+		repeat
+			c[#c+1]:=Floor(f);
+			f:=1/(f-c[#c]);
+		until c[#c] eq 2*c[1];
+	end if;
+	return c;
+end function;
+
+function conv(c)
+	r:=#c-2;
+	if r mod 2 eq 0 and r gt 0 then
+		for i in [2..r+1] do
+			Append(~c,c[i]);
+		end for;
+	end if;
+	s:=0;
+	for i in [r mod 2 eq 1 select r+1 else 2*r+2..2 by -1] do
+		s:=1/(s+c[i]);
+	end for;
+	return c[1]+s;
+end function;
+
+max:=0;
+best:=0;
+for D in [2..1000] do
+	if not(IsSquare(D)) then
+		k:=conv(cf(SquareRoot(D)));
+		x:=Numerator(k);
+		y:=Denominator(k);
+		//if x^2-D*y^2 ne 1  then
+		//	D,cf(SquareRoot(D)),#cf(SquareRoot(D)),k;
+		//	x^2-D*y^2;
+		//end if;
+		if x gt max then
+			max:=x;
+			best:=D;
+		end if;
+	end if;
+end for;
+best;

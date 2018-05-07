@@ -38,24 +38,24 @@ function hand_score (hand)
 	values:=multvalsort([convert(c[1]):c in hand]);
 	consec:=true;
 	for i in [1..4] do
-		if values[i] ne values[i+1] then
+		if values[i] ne values[i+1]-1 then
 			consec:=false;
 			break;
 		end if;
 	end for;
-	mult:=Sort([Multiplicity(values,v):v in SequenceToSet(values)]);
+	mult:=Reverse(Sort([Multiplicity(values,v):v in SequenceToSet(values)]));
 	suitnum:=#SequenceToSet(suits);
 	score:=[i gt 1 select values[7-i] else 0:i in [1..6]];
 	
 	if suitnum eq 1 and consec then
-		if values[1] eq "T" then
+		if values[1] eq 10 then
 			score[1]:=10;
 		else
 			score[1]:=9;
 		end if;
-	elif mult eq [1,4] then
+	elif mult eq [4,1] then
 		score[1]:=8;
-	elif mult eq [2,3] then
+	elif mult eq [3,2] then
 		score[1]:=7;
 	elif suitnum eq 1 then
 		score[1]:=6;

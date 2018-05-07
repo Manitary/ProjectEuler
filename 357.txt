@@ -4,16 +4,25 @@ sum:=0;
 
 for p in P do
 	n:=p-1;
-	check:=true;
+	check1:=true;
 	for f in Factorization(n) do
 		if f[2] gt 1 then
-			check:=false;
+			check1:=false;
 			break;
 		end if;
 	end for;
-	if check then
-		n;
-		sum+:=n;
+	if check1 then
+		check2:=true;
+		for d in Divisors(n) do
+			if not(IsPrime(d+Integers()!(n/d))) then
+				check2:=false;
+				break;
+			end if;
+		end for;
+		if check2 then
+			n;			
+			sum+:=n;
+		end if;
 	end if;
 end for;
 

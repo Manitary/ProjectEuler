@@ -1,23 +1,20 @@
 N:=10^6;
-max_len:=1;
-best:=1;
-visited:=[1];
 lengths:=[1];
+best:=0;
+max_len:=0;
 
-procedure checklength(chain,~visited,~lengths)
-	n:=chain[#chain];
-	if n in visited then
-		for i in [1..#chain-1] do
-			Append(~visited,chain[i]);
-			Append(~lengths,#chain-i+lengths[Index(visited,n)]);
-		end for;
-	else
-		checklength(Append(chain,n mod 2 eq 0 select n div 2 else 3*n+1),~visited,~lengths);
+procedure addlength(n,~lengths,~best)
+	if not(IsDefined(lengths,n)) then
+		m:=n mod 2 eq 0 select n div 2 else 3*n+1;
+		addlength(m,~lengths,~best);
+		lengths[n]:=lengths[m]+1;
+		if n le N and lengths[n] gt max_len then
+			best:=n;
+		end if;
 	end if;
 end procedure;
 
 for n in [2..N] do
-	checklength([n],~visited,~lengths);
+	addlength(n,~lengths,~best);
 end for;
-_,b:=Max(Lengths);
-visited[b];
+best;

@@ -1,0 +1,40 @@
+procedure findset(list,d,s,~found)
+	if #list eq s then
+		found:=true;
+		&+list;
+	else
+		if #list eq 0 then
+			for p in Exclude(PrimesUpTo(10^d),2) do
+				if found then
+					break;
+				end if;
+				findset(Append(list,p),d,s,~found);
+			end for;
+		else
+			primes:=PrimesInInterval(list[#list],10^d);
+			for p in primes do
+				if found then
+					break;
+				end if;
+				ok:=true;
+				for q in list do
+					if not(IsPrime(Seqint(Intseq(p) cat Intseq(q))) and IsPrime(Seqint(Intseq(q) cat Intseq(p)))) then
+						ok:=false;
+						break;
+					end if;
+				end for;
+				if ok then
+					findset(Append(list,p),d,s,~found);
+				end if;
+			end for;
+		end if;
+	end if;
+end procedure;
+
+d:=3;
+s:=5;
+found:=false;
+repeat
+	d+:=1;
+	findset([],d,s,~found);
+until found;

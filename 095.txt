@@ -1,0 +1,29 @@
+N:=10^6;
+visited:={1};
+best:=[1];
+
+procedure findchain(n,~visited,~best)
+	if not(n in visited) then
+		chain:=[];
+		m:=n;
+		repeat
+			Append(~chain,m);
+			m:=SumOfDivisors(chain[#chain])-chain[#chain];
+		until m gt N or m in chain or m in visited;
+		if m in chain then
+			l:=#chain-Index(chain,m)+1;
+			if l gt #best then
+				best:=[chain[i]:i in [Index(chain,m)..#chain]];
+			end if;
+		end if;
+		for k in chain do
+			Include(~visited,k);
+		end for;
+	end if;
+end procedure;
+
+for n in [2..N] do
+	findchain(n,~visited,~best);
+end for;
+m:=Min(best);
+m;

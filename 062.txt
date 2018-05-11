@@ -1,0 +1,20 @@
+d:=2;
+repeat
+	found:=false;
+	d+:=1;
+	cubes:=[i^3:i in [Iroot(10^(d-1),3)+1..Iroot(10^d,3)]];
+	digits:=[Sort(Intseq(n)):n in cubes];
+	ParallelSort(~digits,~cubes);
+	mult:=[Multiplicity(digits,i):i in digits];
+	valid:=[];
+	for i in [1..#mult] do
+		if mult[i] eq 5 then
+			Append(~valid,cubes[i]);
+		end if;
+	end for;
+	if #valid gt 0 then
+		found:=true;
+	end if;
+until found;
+m:=Min(valid);
+m;

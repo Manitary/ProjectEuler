@@ -1,0 +1,27 @@
+S:=SetToSequence(Subsets({0..9},6));
+squares:=[i le 3 select [0,i^2] else Sort(Intseq(i^2)):i in [1..9]];
+tot:=0;
+for i in [1..#S-1] do
+	for j in [i+1..#S] do
+		done:=squares;
+		d1:=S[i];
+		d2:=S[j];
+		if 6 in d1 or 9 in d1 then
+			Include(~d1,6);
+			Include(~d1,9);
+		end if;
+		if 6 in d2 or 9 in d2 then
+			Include(~d2,6);
+			Include(~d2,9);
+		end if;
+		for c1 in d1,c2 in d2 do
+			if Sort([c1,c2]) in done then
+				Exclude(~done,Sort([c1,c2]));
+			end if;
+		end for;
+		if #done eq 0 then
+			tot+:=1;
+		end if;
+	end for;
+end for;
+tot;

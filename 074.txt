@@ -1,0 +1,37 @@
+N:=10^6;
+lengths:=[0];
+max_len:=0;;
+best:={};
+
+procedure findchain(n,~lengths,~best,~max_len)
+	if not(IsDefined(lengths,n)) then
+		chain:=[];
+		m:=n;
+		repeat
+			Append(~chain,m);
+			m:=&+[Factorial(i): i in Intseq(chain[#chain])];
+		until m in chain or IsDefined(lengths,m);
+		if m in chain then
+			while chain[1] ne m do
+				lengths[chain[1]]:=#chain;
+				Remove(~chain,1);
+			end while;
+			for k in chain do
+				lengths[k]:=#chain;
+			end for;
+		else
+			l:=lengths[m]+#chain;
+			while #chain gt 0 do
+				lengths[chain[1]]:=l;
+				l-:=1;
+				Remove(~chain,1);
+			end while;
+		end if;
+	end if;
+end procedure;
+
+for n in [2..N] do
+	findchain(n,~lengths,~best,~max_len);
+end for;
+
+Multiplicity(lengths,60);

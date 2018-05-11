@@ -1,0 +1,66 @@
+s3:={n*(n+1) div 2: n in [45..140]};
+s4:={n^2: n in [32..99]};
+s5:={n*(3*n-1) div 2: n in [26..81]};
+s6:={n*(2*n-1): n in [23..70]};
+s7:={n*(5*n-3) div 2: n in [21..63]};
+s8:={n*(3*n-2): n in [19..58]};
+
+sets:=[s3,s4,s5,s6,s7,s8];
+all:=&join(sets);
+
+function set (n)
+	r:={};
+	for s in sets do
+		if n in s then
+			Include(~r,Index(sets,s));
+		end if;
+	end for;
+	return r;
+end function;
+
+for n in all do
+	if (n div 10) mod 10 eq 0 then
+		Exclude(~all,n);
+	end if;
+end for;
+
+start_pair:={n div 100:n in all};
+for n in all do
+	if not(n mod 100 in start_pair) then
+		Exclude(~all,n);
+	end if;
+end for;
+
+procedure find_seq(seq,all,~found)
+	if #seq eq 6 then
+		if seq[1] div 100 eq seq[6] mod 100 then
+			idx:=[set(n):n in seq];
+			idx1:=[];
+			for s in idx do
+				if #s eq 1 then
+					Append(~idx1,s);
+				end if;
+			end for;
+			if #&join(idx1) eq #idx1 then
+				if &join(idx) eq {1..6} then
+					found:=true;
+					&+seq;
+				end if;
+			end if;
+		end if;
+	else
+		for n in all do
+			if seq[#seq] mod 100 eq n div 100 then
+				find_seq(Append(seq,n),Exclude(all,n),~found);
+			end if;
+		end for;
+	end if;
+end procedure;
+
+found:=false;
+for n in all do
+	find_seq([n],Exclude(all,n),~found);
+	if found then
+		break;
+	end if;
+end for;

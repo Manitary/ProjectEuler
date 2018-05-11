@@ -1,0 +1,6 @@
+k:=1;
+repeat
+    k+:=1;
+    p:=5*k+4;
+until IsDivisibleBy(NumberOfPartitions(p),10^6);
+p;

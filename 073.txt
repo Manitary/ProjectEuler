@@ -1,0 +1,9 @@
+tot:=0;
+for d in [4..12000] do
+	for k in [Ceiling(d/3)..Floor(d/2)] do
+		if GCD(k,d) eq 1 then
+			tot+:=1;
+		end if;
+	end for;
+end for;
+tot;

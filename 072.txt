@@ -1,0 +1,5 @@
+sum:=0;
+for d in [2..10^6] do
+    sum+:=EulerPhi(d);
+end for;
+sum;

@@ -1,0 +1,9 @@
+n:=10;
+primes:=SequenceToSet(PrimesUpTo(n));
+repeat
+	n+:=1;
+	if IsPrime(n) then
+		Include(~primes,n);
+	end if;
+until #RestrictedPartitions(n,primes) gt 5000;
+n;

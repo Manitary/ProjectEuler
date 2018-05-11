@@ -1,0 +1,16 @@
+max:=15*10^5;
+tot:=0;
+for L in [2..max by 2] do
+    sol:=0;
+    d:=Divisors(L^2 div 2);
+    for i in [Floor(#d/2)+1..#d] do
+        if d[i] gt L then
+            break;
+        end if;
+		sol+:=1;
+    end for;
+    if sol eq 1 then 
+        tot+:=1;
+    end if;
+end for;
+tot;

@@ -1,9 +1,1 @@
-F<x>:=PolynomialRing(RealField(102));
-sum:=0;
-for k in [1..100] do
-    if not(IsSquare(k)) then
-        p:=x^2-k*10^202;
-        sum+:=&+Intseq(Floor(Roots(p)[2][1]/100));
-    end if;
-end for;
-sum;
+&+[&+Intseq(Floor(Roots(PolynomialRing(RealField(102))![-k*10^202,0,1])[2][1]/100)):k in [1..100]|not(IsSquare(k))];

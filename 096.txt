@@ -1,0 +1,58 @@
+//grid:=[[0,0,3,0,2,0,6,0,0],[9,0,0,3,0,5,0,0,1],[0,0,1,8,0,6,4,0,0],[0,0,8,1,0,2,9,0,0],[7,0,0,0,0,0,0,0,8],[0,0,6,7,0,8,2,0,0],[0,0,2,6,0,9,5,0,0],[8,0,0,2,0,3,0,0,9],[0,0,5,0,1,0,3,0,0]];
+d:=9;
+d1:=Iroot(d,2);
+
+procedure update_viable (grid,~viable)
+	for r in [1..d], c in [1..d] do
+		if grid[r][c] ne 0 then
+			viable[r][c]:={};
+		else
+			for i in [1..d] do
+				Exclude(~viable[r][c],grid[r][i]);
+				Exclude(~viable[r][c],grid[i][c]);
+			end for;
+			for i in [d1*((r-1) div d1)+1..d1*((r-1) div d1)+d1],j in [d1*((c-1) div d1)+1..d1*((c-1) div d1)+d1] do
+				Exclude(~viable[r][c],grid[i,j]);
+			end for;
+		end if;
+	end for;
+end procedure;
+
+procedure add_unique (~grid,~viable)
+	while true do
+		found:=false;
+		update_viable(grid,~viable);
+		for r in [1..d], c in [1..d] do
+			if #viable[r][c] eq 1 then
+				grid[r][c]:=Representative(viable[r][c]);
+				viable[r][c]:={};
+				found:=true;
+			end if;
+		end for;
+		if not(found) then
+			break;
+		end if;
+	end while;
+end procedure;
+
+F:=Open("C:/Users/Manitary/ProjectEuler/p096_sudoku.txt","r");
+sum:=0;
+while true do
+	g:=Read(F);
+	if IsEof(g) then
+		break;
+	end if;
+	grid:=[];
+	viable:=[[{i:i in [1..d]}:j in [1..d]]:k in [1..d]];
+	for l in [1..d] do
+		w:=Read(F);
+		Append(~grid,[StringToInteger(m):m in Eltseq(w)]);
+	end for;
+	add_unique(~grid,~viable);
+	num:=[grid[1][k]:k in [3..1 by -1]];
+	if 0 notin num then
+		sum+:=Seqint(num);
+	else
+		g cat "not solved";
+	end if;
+end while;

@@ -1,0 +1,40 @@
+F:=Open("p098_words.txt","r");
+list:=Split(Gets(F),",\"");
+lengths:=[#word:word in list];
+ParallelSort(~lengths,~list);
+list:=Prune(Reverse(list));
+maxlen:=0;
+best:=0;
+
+for i in [1..#list-1], j in [i+1..#list] do
+	k:=#list[i];
+	if k lt maxlen then
+		break i;
+	end if;
+	if k ne #list[j] then
+		break;
+	end if;
+	if SequenceToMultiset(Eltseq(list[i])) eq SequenceToMultiset(Eltseq(list[j])) then
+		squares:=[n^2:n in [Iroot(10^k-1,2)..Iroot(10^(k-1),2)+1 by -1]];
+		w1:=Reverse(Eltseq(list[i]));
+		w2:=Reverse(Eltseq(list[j]));
+		for s in squares do
+			n:=Intseq(s);
+			feasible:=true;
+			for c in [#w1..1 by -1] do
+				if n[c] ne n[Index(w1,w1[c])] or w1[c] ne w1[Index(n,n[c])] then
+					feasible:=false;
+					break;
+				end if;
+			end for;
+			if feasible then
+				p:=Seqint([n[Index(w1,c)]:c in w2]);
+				if p in squares then
+					best:=Max([best,s,p]);
+					maxlen:=k;
+				end if;
+			end if;
+		end for;
+	end if;
+end for;
+best;

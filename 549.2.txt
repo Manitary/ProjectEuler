@@ -1,0 +1,20 @@
+N:=100;
+m:=[0: i in [1..N]];
+m[1]:=1;
+for p in PrimesUpTo(N) do
+	m[p]:=p;
+end for;
+
+n:=1;
+while 0 in m do
+	n+:=1;
+	for d in Divisors(Factorial(n)) do
+		if d gt N then
+			break;
+		end if;
+		if m[d] eq 0 then
+			m[d]:=n;
+		end if;
+	end for;
+end while;
+&+m-1;

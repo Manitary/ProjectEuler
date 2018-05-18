@@ -1,10 +1,7 @@
-N:=10^14;
-
 procedure add_digit (num,~sum)
 	if #num gt 2 then
 		if IsPrime(Seqint(num)) then
 			if IsPrime(Seqint(Remove(num,1)) div &+Remove(num,1)) then
-//				Seqint(num);
 				sum+:=Seqint(num);
 			end if;
 		elif #num lt 14 then

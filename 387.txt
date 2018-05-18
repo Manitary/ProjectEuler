@@ -1,31 +1,30 @@
 N:=10^14;
-primes:=[p: p in PrimesUpTo(N)|p gt 10];
 
-function rtH(n)
-	if n lt 10 then
-		return true;
+procedure add_digit (num,~sum)
+	if #num gt 2 then
+		if IsPrime(Seqint(num)) then
+			if IsPrime(Seqint(Remove(num,1)) div &+Remove(num,1)) then
+//				Seqint(num);
+				sum+:=Seqint(num);
+			end if;
+		elif #num lt 14 then
+			if IsDivisibleBy(Seqint(num),&+num) then
+				for i in [0..9] do
+					add_digit(Insert(num,1,i),~sum);
+				end for;
+			end if;
+		end if;
 	else
-		if IsDivisibleBy(n,&+Intseq(n)) then
-			return rtH(n div 10);
-		else
-			return false;
+		if IsDivisibleBy(Seqint(num),&+num) then
+			for i in [0..9] do
+				add_digit(Insert(num,1,i),~sum);
+			end for;
 		end if;
 	end if;
-end function;
-
-function strH(n)
-	if IsDivisibleBy(n, &+Intseq(n)) and IsPrime(n div &+Intseq(n)) then
-		return true;
-	else
-		return false;
-	end if;
-end function;
+end procedure;
 
 sum:=0;
-for n in primes do
-	if strH(n div 10) and rtH(n div 10) then
-		n;
-		sum+:=n;
-	end if;
+for i in [1..9] do
+	add_digit([i],~sum);
 end for;
-"sum:",sum;
+sum;

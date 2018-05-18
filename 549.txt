@@ -1,0 +1,24 @@
+nmod:=func<a,b|a mod b eq 0 select b else a mod b>;
+
+function find_m(n,m)
+	f:=Factorization(n);
+	p:=f[#f][1];
+	a:=f[#f][2];
+	m+:=p-nmod(m,p);
+	while not(IsDivisibleBy(Factorial(m),p^a)) do
+		m+:=p;
+	end while;
+	d:=GCD(n,Factorial(m));
+	if d eq n then
+		return m;
+	else
+		return find_m(n div p^a,m);
+	end if;
+end function;
+
+sum:=0;
+N:=10^8;
+for i in [2..N] do
+	sum+:=find_m(i,0);
+end for;
+sum;

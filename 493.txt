@@ -2,19 +2,28 @@ D:=20;
 C:=7;
 B:=10;
 
+RealField(10)!(C*(1-Binomial((C-1)*B,D)/Binomial(C*B,D)));
+
+/* This did not work :[
 avg:=0;
 tot:=0;
 for k in [Ceiling(D/B)..C] do
 	col:=0;
-	for p in RestrictedPartitions(D,k,{1..B}) do
-		mul:=SequenceToSet([Multiplicity(p,i):i in p ]);
-		count:=NumberOfPermutations(C,k) * &*{Factorial(i):i in mul};
+	for partition in RestrictedPartitions(D,k,{1..B}) do
+		p:=partition;
+		while #p lt C do
+			Append(~p,0);
+		end while;
+		mul:=SequenceToSet([Multiplicity(p,i):i in p]);
+		count:=(Factorial(C) * &*[Binomial(B,i):i in p]) div &*[Factorial(i):i in mul];
 		p,count;
 		col+:=count;
 		tot+:=count;
 	end for;
 	avg+:=k*col;
 end for;
+avg/tot;
 ex:=Sprint(RealField()!(avg/tot));
 ex;
 ex[1]*Substring(ex,3,9);
+*/

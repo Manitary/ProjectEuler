@@ -1,0 +1,20 @@
+D:=20;
+C:=7;
+B:=10;
+
+avg:=0;
+tot:=0;
+for k in [Ceiling(D/B)..C] do
+	col:=0;
+	for p in RestrictedPartitions(D,k,{1..B}) do
+		mul:=SequenceToSet([Multiplicity(p,i):i in p ]);
+		count:=NumberOfPermutations(C,k) * &*{Factorial(i):i in mul};
+		p,count;
+		col+:=count;
+		tot+:=count;
+	end for;
+	avg+:=k*col;
+end for;
+ex:=Sprint(RealField()!(avg/tot));
+ex;
+ex[1]*Substring(ex,3,9);

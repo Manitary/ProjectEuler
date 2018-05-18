@@ -1,0 +1,23 @@
+procedure stuff(n,m,divisors,k,~list)
+	if #divisors eq k then
+		if not(IsDefined(list,k)) and &+divisors eq n and &*divisors eq n then
+			list[k]:=&*divisors;
+			k,"done";
+		end if;
+	else
+		for d in #divisors eq 0 select Divisors(m) else [i:i in Divisors(m)|i ge divisors[#divisors]] do
+			stuff(n,m div d,Append(divisors,d),k,~list);
+		end for;
+	end if;
+end procedure;
+
+K:=12000;
+best:=[1];
+for k in [2..K] do
+	if not(IsDefined(best,k)) then
+		for n in [Max(best)..2*k] do
+			stuff(n,n,[],k,~best);
+		end for;
+	end if;
+end for;
+&+best-1;

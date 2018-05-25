@@ -1,0 +1,43 @@
+function find_next(n,b,lim)
+	if Ilog(b,n)+1 lt lim then
+		return find_next((3*n^2-2*n^3) mod 14^(2*(Ilog(b,n)+1)),b,lim);
+	else
+		return n mod b^lim;
+	end if;
+end function;
+
+function sum_series(n,b)
+	n:=Intseq(n,b);
+	m:=#n-Multiplicity(n,0);
+	sum:=0;
+	i:=0;
+	repeat
+		repeat
+			i+:=1;
+		until n[i] ne 0;
+		sum+:=n[i]*m;
+		m-:=1;
+	until m eq 0;
+	return sum;
+end function;
+
+function base_change(d)
+	if d le 9 then
+		return IntegerToString(d);
+	else
+		case d:
+			when 10: return "a";
+			when 11: return "b";
+			when 12: return "c";
+			when 13: return "d";
+		end case;
+	end if;
+end function;
+
+function print_convert(n)
+	return &*Reverse([base_change(d):d in Intseq(n,14)]);
+end function;
+
+lim:=10000;
+b:=14;
+print_convert(1+sum_series(find_next(b div 2,b,lim),b)+sum_series(find_next(b div 2+1,b,lim),b));

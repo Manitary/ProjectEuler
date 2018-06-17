@@ -1,0 +1,32 @@
+function N(r)
+    if r lt SquareRoot(2) then
+        return 0;
+    end if;
+    t:=1+4*Floor(r);
+    for i in [1..Floor(r)] do
+        k:=SquareRoot(r^2-i^2);
+        t+:=4*(k-Floor(k) gt 1-10^-20 select k else Floor(k));
+    end for;
+    return t;
+end function;
+
+function S(n)
+    if n eq 0 then
+        return 0;
+    end if;
+    F:=Factorization(n);
+    t:=1;
+    for f in F do
+        if f[1] mod 4 eq 1 then
+            t*:=f[2]+1;
+        elif f[1] mod 4 eq 3 then
+            t*:=f[2] mod 2 eq 0 select 1 else 0;
+        end if;
+    end for;
+    return 4*t;
+end function;
+
+r:=10^9;
+S((r^2) div 32);
+N(r*SquareRoot(2)/8);
+2 * r * (3*r/4) + N(r*SquareRoot(2)/8) - S((r^2) div 32) - (r/4 - 1);

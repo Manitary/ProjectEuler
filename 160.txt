@@ -1,0 +1,43 @@
+N:=10^12;
+tot:=1;
+d:=5;
+m:=10^d;
+phi:=EulerPhi(m);
+
+function modpow(num,base,exp,modulo)
+	num mod:=modulo;
+	if exp eq 0 then
+		return 1;
+	elif exp eq 1 then
+		return num;
+	else
+		return modpow(num*base,base,exp-1,modulo);
+	end if;
+	"error";
+	return 0;
+end function;
+
+function numpow(prime,num)
+	times:=0;
+	i:=1;
+	while prime^i le num do
+		times+:=num div prime^i;
+		i+:=1;
+	end while;
+	return times;
+end function;
+
+trail:=numpow(5,N);
+
+p:=1;
+while p le N do
+	p:=NextPrime(p);
+	if p eq 2 then
+		tot*:=modpow(2,2,numpow(2,N)-trail,phi);
+	elif p ne 5 then
+		tot*:=modpow(p,p,numpow(p,N) mod phi,phi);
+	end if;
+	tot mod:=phi;
+end while;
+
+tot;

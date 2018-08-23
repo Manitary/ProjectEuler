@@ -1,0 +1,10 @@
+N:=10^6;
+tot:=0;
+p:=1;
+while p le N do
+	p:=NextPrime(p);
+	if p mod 3 eq 1 and IsSquare((4*p-1) div 3) and Iroot(((4*p-1) div 3),2) mod 2 eq 1 then
+		tot+:=1;
+	end if;
+end while;
+tot;
